@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>نتائج الطلاب</title>
+    <title>نتائج الطلاب - المدرسة النموذجية</title>
     <style>
         * {
             box-sizing: border-box;
@@ -21,7 +21,7 @@
         }
         
         .container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
             background-color: white;
             padding: 30px;
@@ -32,12 +32,40 @@
         h1 {
             text-align: center;
             color: #2c3e50;
-            margin-bottom: 30px;
+            margin-bottom: 10px;
             font-size: 32px;
             background: linear-gradient(45deg, #3498db, #9b59b6);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #7f8c8d;
+            margin-bottom: 30px;
+            font-size: 18px;
+        }
+        
+        .instructions {
+            background: #e8f4fc;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            border-right: 4px solid #3498db;
+        }
+        
+        .instructions h3 {
+            color: #2980b9;
+            margin-bottom: 10px;
+        }
+        
+        .instructions ol {
+            margin-right: 20px;
+        }
+        
+        .instructions li {
+            margin-bottom: 8px;
         }
         
         .search-section {
@@ -174,11 +202,13 @@
             font-size: 18px;
         }
         
-        .footer {
+        .contact-info {
             text-align: center;
             margin-top: 30px;
-            color: #7f8c8d;
-            font-size: 14px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            color: #555;
         }
         
         @media (max-width: 600px) {
@@ -203,10 +233,21 @@
 </head>
 <body>
     <div class="container">
-        <h1>نتائج الطلاب</h1>
+        <h1>نتائج الطلاب - المدرسة النموذجية</h1>
+        <div class="subtitle">الفصل الدراسي الأول 2023/2024</div>
+        
+        <div class="instructions">
+            <h3>كيفية الاستعلام عن النتيجة:</h3>
+            <ol>
+                <li>أدخل رقمك المسلسل في الحقل أدناه (سيتم إعطاؤك هذا الرقم من المدرسة)</li>
+                <li>انقر على زر "عرض النتيجة"</li>
+                <li>ستظهر نتيجتك مع درجات جميع المواد والمجموع الكلي</li>
+            </ol>
+            <p><strong>ملاحظة:</strong> في حال وجود أي خطأ في البيانات، يرجى التواصل مع إدارة المدرسة.</p>
+        </div>
         
         <div class="search-section">
-            <input type="number" id="studentId" placeholder="أدخل رقمك المسلسل">
+            <input type="number" id="studentId" placeholder="أدخل رقمك المسلسل (مثال: 123)">
             <button onclick="searchStudent()">عرض النتيجة</button>
             <div class="error-message" id="errorMessage">رقم الطالب غير موجود. يرجى التحقق من الرقم وإعادة المحاولة.</div>
         </div>
@@ -234,8 +275,9 @@
             <div class="total-grade">المجموع: <span id="totalGrade"></span></div>
         </div>
         
-        <div class="footer">
-            نظام نتائج الطلاب - جميع الحقوق محفوظة &copy; 2025
+        <div class="contact-info">
+            <p>للاستفسارات: راجع إدارة المدرسة أو اتصل على: <strong>0123456789</strong></p>
+            <p>ساعات العمل: من الأحد إلى الخميس، 8:00 صباحاً - 2:00 ظهراً</p>
         </div>
     </div>
 
@@ -243,7 +285,7 @@
         // بيانات الطلاب (سيتم تحميلها من ملف JSON)
         let studentsData = [];
         
-        // مسار ملف JSON الخارجي (يمكنك تغييره ليتناسب مع موقع ملفك)
+        // مسار ملف JSON الخارجي
         const EXTERNAL_JSON_URL = 'students.json';
 
         // تحميل البيانات من ملف JSON مباشرة عند فتح الصفحة
@@ -261,7 +303,7 @@
                 studentsData = await response.json();
                 loadingMessage.style.display = 'none';
                 
-                // إظهار رسالة نجاح تحميل البيانات لفترة وجيزة
+                // إظهار رسالة نجاح تحميل البيانات
                 showStatus('تم تحميل بيانات الطلاب بنجاح', 'success');
                 
             } catch (error) {
